@@ -67,7 +67,7 @@ The moving beam holder was also reduced to approximately 70 g, helping the actua
 
 ### 2. Developing a reliable servo linkage
 
-The servo linkage had several iterations. Early versions suffered from poor clearance, movement in the servo mounting block and difficulty attaching the linkage securely to the servo horn.
+The servo linkage had several iterations. Parts from an unused camera stand were repurposed during prototyping to create elements of the linkage and beam support, allowing the geometry to be tested and modified quickly without fabricating every component from scratch. Early versions suffered from poor clearance, movement in the servo mounting block and difficulty attaching the linkage securely to the servo horn.
 
 The final mechanism used a rigid wooden linkage with rotating joints at both ends. The servo horn was drilled to help to attach to the linkage, while the servo mounting block was fixed more securely to the base to reduce unwanted movement.
 
@@ -131,6 +131,10 @@ These changes were tuned experimentally until the system could repeatedly move t
 <p align="center">
   <img src="media/final_build_photos/system_laptop_control.jpg" alt="Ball-and-beam system operating alongside live serial data" width="80%">
 </p>
+
+An earlier PD tuning run showed the effect of insufficient damping, with the ball repeatedly oscillating around the target before gradually settling. Later tuning reduced this behaviour and produced a faster, more controlled response.
+
+[▶ Watch early oscillatory controller response](media/demo_videos/early_pd_oscillation.mp4)
 
 ## Control System
 
@@ -209,14 +213,13 @@ flowchart LR
 
 The final system was able to repeatedly move the ball towards commanded positions from different starting points and settle close to the target.
 
-During tuning with a target sensor reading of 125 mm, successful runs settled at approximately 124 mm and 119 mm. The controller was also tested at a higher setpoint of approximately 185 mm, demonstrating that the same control approach could control the ball along dfferent parts of the usable sensing region.
+During tuning with a target sensor reading of 126 mm, successful runs settled at approximately 124 mm and 119 mm. The controller was also tested at a higher setpoint of approximately 185 mm, demonstrating that the same control approach could control the ball along dfferent parts of the usable sensing region.
 
 ### Closed-loop demonstrations
 
-**Target ≈ 125 mm**
+**Target ≈ 126 mm** 
 
-[▶ Watch demonstration 1](media/demo_videos/demo_125mm_1.mp4)  
-[▶ Watch demonstration 2](media/demo_videos/demo_125mm_2.mp4)
+[▶ Watch demonstration](media/demo_videos/demo_126mm.mp4)
 
 **Target ≈ 185 mm**
 
@@ -239,7 +242,7 @@ To demonstrate motion across the full beam without hiding this limitation, a two
 1. Open-loop — a short predefined beam motion brings the ball towards the sensor.
 2. Closed-loop regulation — once inside the reliable sensing region, the controller resets its position and velocity estimates and hands control over to the PD algorithm.
 
-[▶ Watch full-length acquisition and control](media/demo_videos/full_length_best.mp4)
+[▶ Watch full-length demonstration](media/demo_videos/full_length_best.mp4)
 
 This approach allowed the complete mechanical travel of the system to be demonstrated while keeping the actual feedback-controlled region within the sensor's reliable operating range.
 
@@ -249,7 +252,7 @@ The main limitation of the prototype was the position sensor. Although the beam 
 
 Further improvements could include:
 
-- replacing the ToF sensor with a sensing method capable of tracking the ball across the full beam;
+- replacing the end-mounted ToF sensor with an overhead vision system, or a narrower-field LiDAR sensor, to track the ball reliably across the full ~700 mm beam;
 - using a more rigid, accurately manufactured beam and linkage;
 - reducing friction and movement in the pivot and linkage joints;
 - collecting position data directly to a file for more systematic controller tuning;
